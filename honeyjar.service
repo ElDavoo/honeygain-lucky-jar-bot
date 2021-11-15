@@ -1,0 +1,17 @@
+[Unit]
+Description = Automatic Honeygain pot draws
+After = network.target
+
+[Service]
+Type = simple
+# Change the folder appropriately!
+WorkingDirectory=/home/pi/honeygain-lucky-jar-bot/
+ExecStart = /usr/bin/python3 -u /home/pi/honeygain-lucky-jar-bot/honeygain-bot.py
+StandardOutput=journal
+StandardError=journal
+# Change user and group appropriately!
+User = pi
+Group = pi
+
+[Install]
+WantedBy = multi-user.target
