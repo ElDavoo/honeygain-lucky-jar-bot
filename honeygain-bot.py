@@ -2,6 +2,7 @@ import json
 import requests
 import datetime
 from time import sleep
+from random import randint
 
 
 def getAuth():
@@ -22,7 +23,13 @@ def main():
     headers["authorization"] = "Bearer " + getAuth()
 
     r = requests.post(url=api_url, headers=headers)
-    print(f": {r.text}")
+    print(f"{r.text}")
 
-main()
-print(f"Bot ran on {datetime.datetime.now()}")
+
+while True:
+    try:
+        main()
+        sleep((60 * 60 * 23)+randint(1000,6000))  # Every 24 hours more or less
+    except:
+        print("Some sort of error occoured!")
+        sleep(300)
