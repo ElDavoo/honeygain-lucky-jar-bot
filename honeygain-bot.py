@@ -1,15 +1,15 @@
 import json
 import requests
-import datetime
 from time import sleep
 from random import randint
+from os import getenv
 
 
 def getAuth():
-    auth = open("auth.txt", "r").read()
-    auth = auth.replace('\n', '')
-    auth = auth.replace('\t', '')
-    return auth
+    try:
+        return open("auth.txt", "r").read().rstrip()
+    except FileNotFoundError:
+        return getenv("TOKEN")
 
 
 def getHeaders():
@@ -30,6 +30,6 @@ while True:
     try:
         main()
         sleep((60 * 60 * 23)+randint(1000,6000))  # Every 24 hours more or less
-    except:
-        print("Some sort of error occoured!")
+    except Exception as e:
+        print(f"Exception: {e}")
         sleep(300)

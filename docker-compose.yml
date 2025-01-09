@@ -1,6 +1,11 @@
-version: "2.1"
 services:
   hg_bot:
     build: .
     container_name: hg
     restart: unless-stopped
+    # One of these:
+    environment:
+      - TOKEN=your_token
+    # or:
+    volumes:
+      - auth.txt:/bot/auth.txt:ro

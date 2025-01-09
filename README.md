@@ -12,7 +12,7 @@
 1. Login to [honeygain dashboard](https://dashboard.honeygain.com/) on web.
 2. Right click and open Inspect Element / Inspect.
 3. Go to "Application", "Local storage" section and find the "JWT Token".
-4. Paste the token into the auth.txt file from this repository.
+4. Paste the token into the auth.txt file from this repository, or use it in the TOKEN env variable.
 
 #### 2. Run App
 
@@ -20,7 +20,11 @@
 
 1. Get to your linux/mac system with docker installed.
 2. Run this command `docker build -t hg-bot:latest . `
-3. Start the docker container and run everytime on boot `docker run -dti --name hg-bot --restart=always hg-bot:latest`
+3. Start the docker container and run everytime on boot:
+   ```docker run -d --name hg-bot -v ./auth.txt:/bot/auth.txt:ro --restart=always hg-bot:latest```
+   or
+   ```docker run -d --name hg-bot -e TOKEN=your-token --restart=always hg-bot:latest```
+
 
 ##### 2b. With systemd
 
